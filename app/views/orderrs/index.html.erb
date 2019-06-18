@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<p id="notice"><%= notice %></p>
+
+<h1>Orderrs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Product</th>
+      <th>Shipping</th>
+      <th>Billing</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orderrs.where(user_id: current_user.id).each do |orderr| %>
+      <tr>
+        <td><%= orderr.user %></td>
+        <td><%= orderr.product %></td>
+        <td><%= orderr.shipping %></td>
+        <td><%= orderr.billing %></td>
+        <td><%= link_to 'Show', orderr %></td>
+        <td><%= link_to 'Edit', edit_orderr_path(orderr) %></td>
+        <td><%= link_to 'Destroy', orderr, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Orderr', new_orderr_path %>
+
+</body>
+</html>

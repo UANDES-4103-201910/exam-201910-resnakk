@@ -7,9 +7,64 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   </head>
 
   <body>
+    <header>
+      
+      <nav class="nav navbar-expand-md navbar-dark bg-dark" >
+        <button class = "navbar-toggler" data-toggle = "collapse" data-target= "#colapse-target" >
+          <span class = "navbar-toggler-icon"></span>
+        </button>
+        <div class = "collapse navbar-collapse" id = "collapse_target">
+          <%=link_to root_path ,class: "btn btn-dark", style: "font-size:25px;color:white", title:"Home" do%>
+            Z-Mobile
+          <% end -%>
+          <%=link_to orderrs_path ,class: "btn btn-dark", style: "font-size:25px;color:white", title:"Home" do%>
+            Cart
+          <% end -%>
+          <ul class = "navbar-nav mr-auto"></ul>
+          <ul class = "navbar-nav">  
+          <%if current_user == nil%>
+
+          <%= link_to new_user_session_path ,class: "btn btn-dark", style: "font-size:25px;color:white", title:"Log in" do%>
+          <button class="btn btn-dark"> Log In </button>
+          <% end -%>
+
+          <% end -%>
+          <%if current_user%>
+          <%= link_to destroy_user_session_path ,method: :delete ,class: "btn btn-dark", style: "font-size:25px;color:white", title:"Log out" do%>
+          <button class="btn btn-dark"> Log Out </button>
+          <% end -%>
+          <% end -%>
+          </ul>
+        </div>
+      </nav>
+      <nav class="nav navbar-expand-md navbar-white bg-light" >
+        <button class = "navbar-toggler" data-toggle = "collapse" data-target= "#colapse-target" >
+          <span class = "navbar-toggler-icon"></span>
+        </button>
+        <div class = "collapse navbar-collapse" id = "collapse_target">
+          <%cats = Category.all%>
+          <%cats.each do |c|%>
+          
+          <%=link_to products_path ,class: "btn btn-dark", style: "font-size:15px;color:white", title:c.category do%>
+          <%=c.category%>  
+          <% end -%>
+          
+          <% end -%>
+
+        </div>
+      </nav>
+    </header>
+    <nav class="navbar fixed-bottom navbar-light bg-light">
+      <%="Z-Mobile"%>
+      <%="Contact: +56977686736, masanchez3@miuandes.cl"%>
+
+    </nav>
     <%= yield %>
+
   </body>
 </html>
